@@ -1,8 +1,12 @@
 const mosca = require('mosca');
 
-const settings = { post: 1234 };
-const broker = new mosca.Server(settings);
+const settings = { port: 1883 };
+const broker = new mosca.Server();
 
 broker.on('ready', () => {
   console.log('Broker is ready');
+});
+
+broker.on('published', (packet) => {
+  console.log(packet.payload.toString());
 });
